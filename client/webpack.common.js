@@ -39,7 +39,6 @@ module.exports = {
             template: "html/index.html"
         }),
         new webpack.HashedModuleIdsPlugin(),
-        new CleanWebpackPlugin(["public"]),
         new CopyWebpackPlugin([
             { from: 'asset/**', to: '' }
         ])

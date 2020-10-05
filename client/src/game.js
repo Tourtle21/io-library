@@ -10,7 +10,7 @@ module.exports = class Game extends Phaser.Scene {
   init() {
     client.createGame(this);
     this.room = null;
-    this.cursors = null;
+    // this.cursors = null;
     this.players = {};
   }
 
@@ -38,15 +38,15 @@ module.exports = class Game extends Phaser.Scene {
     if (this.cursors.d.isDown) {
       client.sendMessage('movePlayerRight');
     }
-    if (this.cursors.w.isDown) {
-      client.sendMessage('movePlayerUp');
-    }
-    if (this.cursors.a.isDown) {
-      client.sendMessage('movePlayerLeft');
-    }
-    if (this.cursors.s.isDown) {
-      client.sendMessage('movePlayerDown');
-    }
+    // if (this.cursors.w.isDown) {
+    //   client.sendMessage('movePlayerUp');
+    // }
+    // if (this.cursors.a.isDown) {
+    //   client.sendMessage('movePlayerLeft');
+    // }
+    // if (this.cursors.s.isDown) {
+    //   client.sendMessage('movePlayerDown');
+    // }
   }
 
   connect() {
@@ -59,7 +59,6 @@ module.exports = class Game extends Phaser.Scene {
 
     client.listenFor('players', function(change, player, id) {
       if (change == 'add') {
-        console.log("Create Player")
         let ninja = client.createSprite('ninja', player.x, player.y)
         ninja.setScale(0.5);
         if (player.id === id) {

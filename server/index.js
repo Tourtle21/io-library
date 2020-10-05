@@ -6,12 +6,18 @@ const config = require("./../config.json");
 const express = require('express');
 const app = express();
 const port = process.env.PORT || config.serverDevPort;
+const path = require('path');
 
 const server = http.createServer(app);
 const gameServer = new colyseus.Server({server: server});
 
 gameServer.register('main', require('./rooms/room.js'));
 server.listen(port);
+
+app.get('/',function(req,res){ 
+    res.sendFile(path.join(__dirname+'./../client/public2/index.html')); 
+    //__dirname : It will resolve to your project folder. 
+});
 
 app.use(express.static(__dirname + "/../client/public", {
     extensions: "html"
