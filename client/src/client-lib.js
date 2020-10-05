@@ -39,6 +39,7 @@ module.exports = {
     },
 
     createSquare(width, height, x, y, color) {
+        console.log("CREATING")
         var rect = new Phaser.Geom.Rectangle(width, height, x, y);
         var graphics = game.add.graphics({ fillStyle: { color: `0x${color}` } });
         graphics.fillRectShape(rect);
@@ -56,13 +57,17 @@ module.exports = {
     listenFor(type, cb) {
         game.room.listen(`${type}/:id`, function(change) {
             if (change.operation == 'add') {
-                cb('add', change.value, game.room.sessionId);
+                if (type === 'board') {
+                    cb(change.value.width, change.value.height, change.value.color)
+                } else {
+                    cb('add', change.value, game.room.sessionId);
+                }
             } else {
                 cb('remove');
             }
         });
         game.room.listen(`${type}/:id/:attribute`, function(change) {
-            game[type][change.path.id][change.path.attribute] = change.value
+            if (type !== 'board') game[type][change.path.id][change.path.attribute] = change.value;
         })
     },
     cameraFollow(sprite) {
@@ -70,5 +75,8 @@ module.exports = {
     },
     sendMessage(type) {
         game.room.send({[type]: true});
+    },
+    drawBoard(width, height, color) {
+        this.createSquare(-width/2, -height/2, width, height, color)
     }
 }
