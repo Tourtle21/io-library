@@ -5,7 +5,7 @@ const lib = require('./client-lib.js');
 require("./../css/main.css");
 
 (function() {
-  const aspectRatio = 16 / 9;
+  const aspectRatio = window.innerWidth / window.innerHeight;
 
   //fit game container so that game always appears "fullscreen",
   //but cut off edges when viewport is not correct aspect ratio
@@ -34,7 +34,7 @@ require("./../css/main.css");
     $(window).trigger("resize");
   });
 
-  const height = 720;
+  const height = window.innerHeight;
   const width = height * aspectRatio;
   var config = {
     type: Phaser.AUTO,
