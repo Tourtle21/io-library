@@ -1,7 +1,6 @@
-const { sendMessage } = require('./client-lib');
-const client = require('./client-lib');
-const {Phaser, Colyseus, endpoint} = client.getImports();
-const colyseus = new Colyseus.Client(endpoint);
+const Phaser = require('phaser');
+const ClientLib = require('./client-lib');
+const g = new ClientLib();
 
 const keyCodes = Phaser.Input.Keyboard.KeyCodes;
 const keys = {

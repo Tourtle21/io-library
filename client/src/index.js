@@ -51,6 +51,5 @@ require("./../css/main.css");
   };
 
   var game = new Phaser.Game(config);
-  lib.createGame(Game);
   game.scene.start("Game");
 })();
